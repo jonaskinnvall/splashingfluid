@@ -1,5 +1,17 @@
 import maya.cmds as cmds
 
-container = cmds.polyCube(w=1, h=1, d=1, sx=5, sy=1, sz=5,
-                          ax=(0, 1, 0), cuv=4, ch=1)
-cmds.move(0, 0.5, 0, container)
+#Create new scene
+cmds.file(f=True, new=True)
+
+#Create ground polyCube
+cmds.polyCube(w=10, d=10, h=0.01, sx=10, sy=10, sz=10, name='ground')
+
+#Create wall polyCubes
+wall = cmds.polyCube(w=10, d=0.01, h=2, sx=10, sy=10, sz=10, name='wall1')
+cmds.move(0, 1, -5, wall)
+wall = cmds.polyCube(w=10, d=0.01, h=2, sx=10, sy=10, sz=10, name='wall2')
+cmds.move(0, 1, 5, wall)
+wall = cmds.polyCube(w=0.01, d=10, h=2, sx=10, sy=10, sz=10, name='wall3')
+cmds.move(-5, 1, 0, wall)
+wall = cmds.polyCube(w=0.01, d=10, h=2, sx=10, sy=10, sz=10, name='wall4')
+cmds.move(5, 1, 0, wall)
