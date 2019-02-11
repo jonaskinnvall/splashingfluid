@@ -2,7 +2,28 @@ import maya.cmds as cmds
 import maya.mel
 #Create new scene
 cmds.file(f=True, new=True)
+#Create Box
+cmds.polyCube(w=1, h=5, d=1, ax=[0,1,0], name='cube')
+cmds.move(0,2.5,0, 'cube')
+cmds.select('cube.f[1]')
+cmds.polyExtrudeFacet(kft=True, ls=(0.99,0.99,0.99), ty=-4.99)
+cmds.select('cube')
+cmds.setAttr('lambert1.transparency', 0.9, 0.9, 0.9, type='double3')
+maya.mel.eval("makeCollideNCloth")
+cmds.select('cube')
+cmds.rigidBody(pas=True)
 
+#Create Falling Ball
+cmds.polySphere(r=0.2, ax=[0,1,0], cuv=2, name='ball')
+cmds.move(0,20,0, 'ball')
+cmds.select('ball')
+maya.mel.eval("makeCollideNCloth")
+cmds.select('ball')
+cmds.rigidBody(act=True)
+cmds.gravity(name='grav')
+cmds.connectDynamic('ball', f='grav')
+
+'''
 #Create bowl
 cmds.polySphere(r=3, ax=[0,1,0], cuv=2, name='bowl')
 cmds.move(0,3,0, 'bowl')
@@ -20,11 +41,14 @@ cmds.select('rod')
 cmds.rotate(0,45,0)
 maya.mel.eval("makeCollideNCloth")
 
+'''
 #Create liquid1
-#cmds.nParticle( ll=[-1.4,5,-1.4], ur=[-1,35,-1], grs=0.2)
-cmds.nParticle(ll=[-0.2, 5, -0.2], ur=[0.2, 100, 0.2], grs=0.2)
+cmds.nParticle( ll=[-0.45,0.1,-0.45], ur=[0.45,5,0.45], grs=0.1)
+
+#cmds.nParticle( ll=[-1.4,35,-1.4], ur=[-1,65,-1], grs=0.1)
+#cmds.nParticle(ll=[-0.2, 5, -0.2], ur=[0.2, 60, 0.2], grs=0.2)
 cmds.select('nParticleShape1')
-cmds.setAttr('nParticleShape1.radius', 0.1)
+cmds.setAttr('nParticleShape1.radius', 0.05)
 cmds.setAttr('nParticleShape1.enableSPH', 1)
 cmds.setAttr('nParticleShape1.selfCollide', 0)
 cmds.setAttr('nParticleShape1.particleRenderType', 7)
@@ -33,12 +57,12 @@ cmds.setAttr('nParticleShape1.surfaceTension', 1)
 cmds.setAttr('nParticleShape1.incompressibility', 3)
 cmds.setAttr('nParticleShape1.viscosity', 0.01)
 cmds.setAttr('nParticleShape1.radiusScaleSPH', 0.8)
-cmds.setAttr('nParticleShape1.friction', 0.1)
+cmds.setAttr('nParticleShape1.friction', 0.01)
 cmds.setAttr('nParticleShape1.maxSelfCollisionIterations', 10)
 cmds.setAttr('nParticleShape1.restDensity', 2.5)
-'''
+
 #Create liquid2
-cmds.nParticle( ll=[-1.4,5,-1.4], ur=[-1,35,-1], grs=0.2)
+cmds.nParticle( ll=[1,5,1], ur=[1.4,35,1.4], grs=0.2)
 cmds.select('nParticleShape2')
 cmds.setAttr('nParticleShape2.radius', 0.1)
 cmds.setAttr('nParticleShape2.enableSPH', 1)
@@ -49,10 +73,10 @@ cmds.setAttr('nParticleShape2.surfaceTension', 1)
 cmds.setAttr('nParticleShape2.incompressibility', 3)
 cmds.setAttr('nParticleShape2.viscosity', 0.01)
 cmds.setAttr('nParticleShape2.radiusScaleSPH', 0.8)
-cmds.setAttr('nParticleShape2.friction', 0.1)
+cmds.setAttr('nParticleShape2.friction', 0.01)
 cmds.setAttr('nParticleShape2.maxSelfCollisionIterations', 10)
 cmds.setAttr('nParticleShape2.restDensity', 2.5)
-'''
+
 #Animation
 #keyFrames = 150
 #cmds.playbackOptions( playbackSpeed = 0, maxPlaybackSpeed = 1, min = 1, max = 150 )
