@@ -36,7 +36,7 @@ cmds.setAttr('nParticleShape1.radiusScaleSPH', 0.8)
 cmds.setAttr('nParticleShape1.friction', 0.1)
 cmds.setAttr('nParticleShape1.maxSelfCollisionIterations', 10)
 cmds.setAttr('nParticleShape1.restDensity', 2.5)
-
+'''
 #Create liquid2
 cmds.nParticle( ll=[-1.4,5,-1.4], ur=[-1,35,-1], grs=0.2)
 cmds.select('nParticleShape2')
@@ -52,7 +52,7 @@ cmds.setAttr('nParticleShape2.radiusScaleSPH', 0.8)
 cmds.setAttr('nParticleShape2.friction', 0.1)
 cmds.setAttr('nParticleShape2.maxSelfCollisionIterations', 10)
 cmds.setAttr('nParticleShape2.restDensity', 2.5)
-
+'''
 #Animation
 #keyFrames = 150
 #cmds.playbackOptions( playbackSpeed = 0, maxPlaybackSpeed = 1, min = 1, max = 150 )
